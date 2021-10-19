@@ -16,7 +16,7 @@ if __name__ == "__main__":
     ifile = "/home/pkumar/data/pubmed/graph_structure"
     num_vcount = 19717
 
-    G = cg.create_csr_graph(ifile, num_vcount, ingestion_flag)
+    G = cg.create_csr_graph_simple(ifile, num_vcount, ingestion_flag)
     
     input_feature_dim = 500
     net = gcnconv.GCN(G, input_feature_dim, 16, 3)
@@ -66,7 +66,7 @@ if __name__ == "__main__":
         loss.backward()
         optimizer.step()
 
-        #print('Epoch %d | Train_Loss: %.4f' % (epoch, loss.item()))
+        print('Epoch %d | Train_Loss: %.4f' % (epoch, loss.item()))
 
         # check the accuracy for test data
         #logits_test = net.forward(feature)

@@ -8,7 +8,7 @@ def memoryview_to_np(memview, nebr_dt):
     a = arr.view(nebr_dt)
     return a;
 
-def create_csr_graphi_simple(ifile, num_vcount, ingestion_flag):
+def create_csr_graph_simple(ifile, num_vcount, ingestion_flag):
     num_sources = 1
     num_thread = 2
 
