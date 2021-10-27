@@ -72,7 +72,7 @@ PYBIND11_MODULE(kernel, m) {
   m.def("init_graph",
       [](py::array offset_csr, py::array nebrs_csr, py::array offset_csc, py::array nebrs_csc, int64_t flag, int64_t num_vcount) {
            graph_t* graph =  new graph_t;
-           //cout<< offset_csr.shape(0) - 1<< "num_vcount"<< endl;
+          //  cout<< offset_csr.shape(0) - 1<< "num_vcount"<< endl;
            graph->init(offset_csr.shape(0) - 1, nebrs_csr.itemsize(), 
                  offset_csr.request().ptr, nebrs_csr.request().ptr,
                  offset_csc.request().ptr, nebrs_csc.request().ptr, flag, num_vcount);

@@ -15,13 +15,21 @@ class csr_t {
     vid_t  e_count;
     vid_t  dst_size;
     vid_t* offset;
-    char* nebrs;
+    // char* nebrs;
+    vid_t* nebrs;
     int*  degrees;
     int64_t flag;
 
  public:
     csr_t() {};
     void init(vid_t a_vcount, vid_t a_dstsize, void* a_offset, void* a_nebrs, int64_t a_flag, vid_t edge_count) {
+        v_count = a_vcount;
+        dst_size = a_dstsize;
+        offset = (vid_t*)a_offset;
+        // nebrs = (char*)a_nebrs;
+        nebrs = (vid_t*)a_nebrs;
+        e_count = offset[edge_count];
+        flag = a_flag;
     }
     vid_t get_vcount() {
         return v_count;
@@ -64,7 +72,8 @@ class graph_t {
     coo_t coo;
  public:
     void init(vid_t a_vcount, vid_t a_dstsize, void* a_offset, void* a_nebrs, void* a_offset1, void* a_nebrs1, int64_t flag, int64_t num_vcount) {
-
+        csr.init(a_vcount, a_dstsize, a_offset, a_nebrs, flag, num_vcount);
+        csc.init(a_vcount, a_dstsize, a_offset1, a_nebrs1, flag, num_vcount);
     }
 
     vid_t get_vcount() {

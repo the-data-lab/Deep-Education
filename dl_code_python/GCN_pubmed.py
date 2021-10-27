@@ -1,3 +1,4 @@
+import os, sys
 import torch
 import torch.nn as nn
 import itertools
@@ -11,9 +12,12 @@ import pubmed_util
 import create_graph as cg
 
 
-if __name__ == "__main__":
+DatasetPath = '/home/snowball/data'
+
+def main():
+    global DatasetPath
     ingestion_flag = gone.enumGraph.eUdir
-    ifile = "/home/pkumar/data/pubmed/graph_structure"
+    ifile = os.path.join(DatasetPath, "pubmed/graph_structure")
     num_vcount = 19717
 
     G = cg.create_csr_graph_simple(ifile, num_vcount, ingestion_flag)
@@ -22,11 +26,11 @@ if __name__ == "__main__":
     net = gcnconv.GCN(G, input_feature_dim, 16, 3)
     #net = gcnconv.GCN(G, input_feature_dim, 16, 3, 3, 1)
 
-    feature = pubmed_util.read_feature_info("/home/pkumar/data/pubmed/feature/feature.txt")
-    train_id = pubmed_util.read_index_info("/home/pkumar/data/pubmed/index/train_index.txt")
-    test_id = pubmed_util.read_index_info("/home/pkumar/data/pubmed/index/test_index.txt")
-    test_y_label =  pubmed_util.read_label_info("/home/pkumar/data/pubmed/label/test_y_label.txt")
-    train_y_label =  pubmed_util.read_label_info("/home/pkumar/data/pubmed/label/y_label.txt")
+    feature = pubmed_util.read_feature_info(os.path.join(DatasetPath, "pubmed/feature/feature.txt"))
+    train_id = pubmed_util.read_index_info(os.path.join(DatasetPath, "pubmed/index/train_index.txt"))
+    test_id = pubmed_util.read_index_info(os.path.join(DatasetPath, "pubmed/index/test_index.txt"))
+    test_y_label =  pubmed_util.read_label_info(os.path.join(DatasetPath, "pubmed/label/test_y_label.txt"))
+    train_y_label =  pubmed_util.read_label_info(os.path.join(DatasetPath, "pubmed/label/y_label.txt"))
     
 
 
@@ -83,3 +87,7 @@ if __name__ == "__main__":
     acc_val = pubmed_util.accuracy(logp_test[test_id], test_y_label)
     print('Epoch %d | Test_accuracy: %.4f' % (epoch, acc_val))
 
+
+
+if __name__ == "__main__":
+    main()

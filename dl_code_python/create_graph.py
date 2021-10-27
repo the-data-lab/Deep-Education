@@ -6,7 +6,7 @@ import datetime
 def memoryview_to_np(memview, nebr_dt):
     arr = np.array(memview, copy=False)
     a = arr.view(nebr_dt)
-    return a;
+    return a
 
 def create_csr_graph_simple(ifile, num_vcount, ingestion_flag):
     num_sources = 1
@@ -28,16 +28,18 @@ def create_csr_graph_simple(ifile, num_vcount, ingestion_flag):
     #manager.run_bfs(1)
 
     
-    offset_csr1, offset_csc1, nebrs_csr1, nebrs_csc1 = pg.create_csr_view(pgraph);
-    offset_csr = memoryview_to_np(offset_csr1, offset_dt);
-    offset_csc = memoryview_to_np(offset_csc1, offset_dt);
-    nebrs_csr = memoryview_to_np(nebrs_csr1, csr_dt);
-    nebrs_csc = memoryview_to_np(nebrs_csc1, csr_dt);
+    offset_csr1, offset_csc1, nebrs_csr1, nebrs_csc1 = pg.create_csr_view(pgraph)
+    offset_csr = memoryview_to_np(offset_csr1, offset_dt)
+    offset_csc = memoryview_to_np(offset_csc1, offset_dt)
+    nebrs_csr = memoryview_to_np(nebrs_csr1, csr_dt)
+    nebrs_csc = memoryview_to_np(nebrs_csc1, csr_dt)
+    # print(nebrs_csr)
+    # print(nebrs_csc)
     
-    kernel_graph_flag = 0; #eADJ graph
-    csr_graph = kernel.init_graph(offset_csr, nebrs_csr, offset_csc, nebrs_csc, kernel_graph_flag, num_vcount);
+    kernel_graph_flag = 0 #eADJ graph
+    csr_graph = kernel.init_graph(offset_csr, nebrs_csr, offset_csc, nebrs_csc, kernel_graph_flag, num_vcount)
 
-    return csr_graph;
+    return csr_graph
 
 def create_csr_graph(ifile, num_vcount, ingestion_flag):
     num_sources = 1
@@ -59,13 +61,13 @@ def create_csr_graph(ifile, num_vcount, ingestion_flag):
     #manager.run_bfs(1)
 
     
-    offset_csr1, offset_csc1, nebrs_csr1, nebrs_csc1 = pg.create_csr_view(pgraph);
-    offset_csr = memoryview_to_np(offset_csr1, offset_dt);
-    offset_csc = memoryview_to_np(offset_csc1, offset_dt);
-    nebrs_csr = memoryview_to_np(nebrs_csr1, csr_dt);
-    nebrs_csc = memoryview_to_np(nebrs_csc1, csr_dt);
+    offset_csr1, offset_csc1, nebrs_csr1, nebrs_csc1 = pg.create_csr_view(pgraph)
+    offset_csr = memoryview_to_np(offset_csr1, offset_dt)
+    offset_csc = memoryview_to_np(offset_csc1, offset_dt)
+    nebrs_csr = memoryview_to_np(nebrs_csr1, csr_dt)
+    nebrs_csc = memoryview_to_np(nebrs_csc1, csr_dt)
     
-    kernel_graph_flag = 0; #eADJ graph
-    csr_graph = kernel.init_graph(offset_csr, nebrs_csr, offset_csc, nebrs_csc, kernel_graph_flag, num_vcount);
+    kernel_graph_flag = 0 #eADJ graph
+    csr_graph = kernel.init_graph(offset_csr, nebrs_csr, offset_csc, nebrs_csc, kernel_graph_flag, num_vcount)
 
-    return csr_graph;
+    return csr_graph
